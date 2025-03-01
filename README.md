@@ -1,69 +1,47 @@
-# Welcome to your Lovable project
+# PixelLock Vault Documentation
 
-## Project info
+## Introduction
+PixelLock Vault is a decentralized photo storage application that ensures your photos remain permanently available and securely encrypted. Unlike IPFS, PixelLock Vault guarantees continuous accessibility while maintaining top-tier security. Additionally, the platform features a family sharing system, allowing families to share and view photos seamlessly.
 
-**URL**: https://lovable.dev/projects/eae53966-9daf-4d00-b236-8adb8f87cfca
+## Installation and Setup
+### Prerequisites
+Ensure you have the following installed on your system:
+- Node.js and npm
+- Git
 
-## How can I edit this code?
+### Steps to Run the Project
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/ijlal321/pixellock-vault
+   ```
+2. Navigate into the project directory:
+   ```sh
+   cd pixellock-vault
+   ```
+3. Install dependencies:
+   ```sh
+   npm install
+   ```
+4. Create an `.env` file in the root directory and add your API key:
+   ```sh
+   VITE_AUTO_DRIVE_API_KEY=your_api_key_here
+   ```
+5. Start the development server:
+   ```sh
+   npm run dev
+   ```
 
-There are several ways of editing your application.
+## Features
+- **Permanent Photo Storage**: Unlike traditional storage solutions, your photos remain accessible forever.
+- **Decentralized Security**: Photos are encrypted and stored securely, preventing unauthorized access.
+- **Family Sharing**: A dedicated system for families to view and share their pictures effortlessly.
+- **Reliable and Always Available**: Ensures continuous availability without relying on centralized servers.
 
-**Use Lovable**
+## Contributing
+If you want to contribute to PixelLock Vault, feel free to fork the repository, make changes, and submit a pull request.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/eae53966-9daf-4d00-b236-8adb8f87cfca) and start prompting.
+## License
+This project is licensed under the [MIT License](LICENSE).
 
-Changes made via Lovable will be committed automatically to this repo.
+For any issues or questions, please open an issue on the [GitHub repository](https://github.com/ijlal321/pixellock-vault/issues).
 
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with .
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/eae53966-9daf-4d00-b236-8adb8f87cfca) and click on Share -> Publish.
-
-## I want to use a custom domain - is that possible?
-
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
