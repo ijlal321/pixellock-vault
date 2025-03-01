@@ -25,7 +25,7 @@ const Hero = () => {
   };
   
   return (
-    <div className="relative min-h-hero flex items-center overflow-hidden">
+    <div className="relative min-h-screen flex items-center overflow-hidden">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900"></div>
       
@@ -39,18 +39,18 @@ const Hero = () => {
             <p className="text-xs text-white/90 font-medium">Decentralized. Encrypted. Always Accessible.</p>
           </div>
           
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight animate-fade-in">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
             Secure, Permanent, and{' '}
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-gray-300">
               Private Photo Storage
             </span>
           </h1>
           
-          <p className="text-lg text-white/80 mb-8 max-w-2xl mx-auto opacity-0 animate-fade-in-delay-1">
+          <p className="text-lg text-white/80 mb-8 max-w-2xl mx-auto">
             Your memories deserve a safe place. Store them permanently with end-to-end encryption in a decentralized network that will never lose your precious photos.
           </p>
           
-          <div className="flex flex-col sm:flex-row justify-center gap-4 opacity-0 animate-fade-in-delay-2">
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
             <a 
               href="/upload" 
               className="btn-hover-effect bg-gradient-to-r from-white to-gray-100 text-gray-900 font-medium px-6 py-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
@@ -65,7 +65,7 @@ const Hero = () => {
             </button>
           </div>
           
-          <div className="mt-12 opacity-0 animate-fade-in-delay-3">
+          <div className="mt-12">
             <button 
               onClick={scrollToFeatures} 
               className="text-white/60 hover:text-white transition-colors duration-300 flex flex-col items-center"

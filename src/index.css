@@ -129,6 +129,12 @@
     @apply bg-primary/20;
   }
   
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  
   .animate-fade-in-up {
     opacity: 0;
     animation: fadeInUp 1s ease forwards;
