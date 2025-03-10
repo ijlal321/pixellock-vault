@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
-import { uploadFileFromInput, createAutoDriveApi } from '@autonomys/auto-drive'
+import { createAutoDriveApi } from '@autonomys/auto-drive'
 import { NetworkId } from '@autonomys/auto-utils';
 
 const ManagePhotos = () => {
@@ -10,6 +10,60 @@ const ManagePhotos = () => {
   const [newMember, setNewMember] = useState('');
   const [photos, setPhotos] = useState([]);
   const [password, setPassword] = useState('11111111');
+  const [status, setStatus] = useState('');
+
+  useEffect(() => {
+    const handleLoadMembers = async () => {
+      setStatus('Loading Previous Images...');
+      const apiKey = import.meta.env.VITE_AUTO_DRIVE_API_KEY;
+
+      if (!apiKey) {
+        console.error('API key is not defined');
+        return;
+      }
+
+      const api = createAutoDriveApi({ apiKey: apiKey, network: NetworkId.TAURUS });
+
+      try {
+        const myFiles = await api.getMyFiles(0, 100); // loading 100 files
+        console.log(`Retrieved ${myFiles.rows.length} files of ${myFiles.totalCount} total`);
+
+        const loadedPhotos = await Promise.all(myFiles.rows.map(async (file) => {
+          try {
+            const cid = file.headCid;
+            const stream = await api.downloadFile(cid, password);
+            let curImage = Buffer.alloc(0);
+            for await (const chunk of stream) {
+              curImage = Buffer.concat([curImage, chunk]);
+            }
+            console.log(curImage); // in uint8array format
+            // Convert to blob
+            const blob = new Blob([curImage], { type: 'image/jpeg' });
+
+            return {
+              id: file.headCid,
+              name: file.name,
+              tags: [],
+              file: blob,
+            };
+          } catch (error) {
+            console.error('Error downloading file:', error);
+            setStatus('Error loading images');
+            return null;
+          }
+        }));
+
+        setPhotos(loadedPhotos.filter(photo => photo !== null));
+      } catch (error) {
+        console.error('Error loading family members:', error);
+        setStatus('Error loading images');
+      }
+      setStatus('');
+    };
+
+    handleLoadMembers();
+  }, []);
+
 
   const handleAddMember = () => {
     if (newMember) {
@@ -19,6 +73,7 @@ const ManagePhotos = () => {
   };
 
   const handleUploadPhoto = async (event) => {
+    setStatus('Uploading...');
     const file = event.target.files[0];
     const apiKey = import.meta.env.VITE_AUTO_DRIVE_API_KEY;
 
@@ -35,8 +90,8 @@ const ManagePhotos = () => {
     };
 
     try {
-        console.log('Uploading file...');
-      const cid = await uploadFileFromInput(api, file, options);
+      console.log('Uploading file...');
+      const cid = await api.uploadFileFromInput(file, options);
       console.log(`The file is uploaded and its cid is ${cid}`);
 
       if (file) {
@@ -46,23 +101,25 @@ const ManagePhotos = () => {
           tags: [],
           file: file,
         };
-        
+
         setPhotos([newPhoto, ...photos]);
       }
     } catch (error) {
       console.error('Error uploading file:', error);
+      setStatus('Error uploading image');
     }
+    setStatus('');
   };
 
   const handleTagPhoto = (photoId, member) => {
     setPhotos(photos.map(photo =>
       photo.id === photoId
         ? {
-            ...photo,
-            tags: photo.tags.includes(member)
-              ? photo.tags.filter(tag => tag !== member)
-              : [...photo.tags, member],
-          }
+          ...photo,
+          tags: photo.tags.includes(member)
+            ? photo.tags.filter(tag => tag !== member)
+            : [...photo.tags, member],
+        }
         : photo
     ));
   };
@@ -100,6 +157,7 @@ const ManagePhotos = () => {
         </section>
 
         <section className="mb-16">
+          <h2 className="text-2xl font-bold mb-4 text-slate-900">{status}</h2>
           <h2 className="text-2xl font-bold mb-4 text-slate-900">Upload Photos</h2>
           <input
             type="file"
