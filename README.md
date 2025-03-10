@@ -22,7 +22,7 @@ We would **host a dedicated server** for our project1, thus request would go fro
 Ensure you have the following installed on your system:
 - Node.js and npm
 - Git
-- **A Cors Un-Blocking Extension**
+- **A Cors Un-Blocking Extension -- IMP**
 
 ### Steps to Run the Project
 1. Clone the repository:
